@@ -5,6 +5,9 @@ import { User } from "./models/User";
 import { Company } from "./models/Company";
 import { Subscription } from "./models/Subscription";
 import logger from "../utils/logger";
+import { Jobs } from "./models/Jobs";
+import { AppliedJobs } from "./models/AppliedJobs";
+import { UserSubscription } from "./models/UserSubscription";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,7 +16,7 @@ export const AppDataSource = new DataSource({
   username: "manulangat",
   password: "3050manu",
   database: "JobSeekers",
-  entities: [User, Company, Subscription],
+  entities: [User, Company, Subscription, Jobs, AppliedJobs, UserSubscription],
   synchronize: true,
   logging: false,
 });

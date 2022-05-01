@@ -11,12 +11,12 @@ import authService from "./authService";
 import logger from "../../utils/logger";
 import errorHandler from "../../helpers/errorHandler";
 class authController {
-  static async getUser(req: Request, res: Response) {
+  static async getUser(req: any, res: Response) {
+    logger.info(`Getting user with email ${req.body.email}`);
     try {
-      const users = await User.findAll();
-      res.status(200).send(users);
+      return responseHandler(res, 200, req.user);
     } catch (error) {
-      console.error("Hey,an error here");
+      return errorHandler(res, 500, error.message);
     }
   }
   static async createUser(req: Request, res: Response) {
@@ -67,7 +67,7 @@ class authController {
         );
         if (isPassword) {
           const token = jwt.sign(
-            { email },
+            { email: email },
             process.env.JWT_SECRET_KEY || "hello",
             {
               expiresIn: "24h",
