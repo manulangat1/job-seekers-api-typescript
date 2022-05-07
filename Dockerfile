@@ -1,12 +1,14 @@
 FROM node 
 
-WORKDIR /app
+MAINTAINER emmanuel
 
-COPY package*.json ./
+WORKDIR /app/
+
+COPY package*.json /app/
 
 RUN npm install
 
-COPY . .
+COPY . /app/
 
 EXPOSE 8080
 
